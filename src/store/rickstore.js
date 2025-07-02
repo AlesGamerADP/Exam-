@@ -6,7 +6,7 @@ export const rickStore = create((set) => ({
 
     getPersonajes: async () => {
         const respuesta = await api.get('/character/');
-        set({ personajes: respuesta.data });
+        set({ personajes: respuesta.data.results });
     },
 
 }));

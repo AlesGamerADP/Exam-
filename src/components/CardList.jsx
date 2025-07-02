@@ -1,24 +1,21 @@
-import { useEffect } from 'react';
+import Card from './Card';
 import { rickStore } from '../store/rickstore';
 
 const CardList = () => {
-    const {personajes,getPersonajes} = rickStore();
-
-    useEffect(()=>{
-        getPersonajes();
-    }, []);
+    const personajes = rickStore(state => state.personajes);
     
     return (
     <div className="row">
-      {personajes.map?((personaje) => (
-        <ProductCard
-          key={personaje.id}
-          producto={personaje}
-        />
-      )) : <p>Cargando...</p>}
+      {personajes && personajes.length > 0 ? (
+        personajes.map((personaje) => (
+          <Card
+            key={personaje.id}
+            personaje={personaje}
+          />
+        ))
+      ) : <p>Cargando...</p>}
     </div>
     )
-
 }
 
 export default CardList;
